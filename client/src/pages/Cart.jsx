@@ -104,55 +104,58 @@ const Cart = () => {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white shadow-lg mb-8">
+            <nav className="bg-white shadow-xl relative z-10 mb-8">
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center h-20">
                         <div className="flex space-x-7">
                             <div>
                                 <a href="#" onClick={() => navigate('/dashboard')} className="flex items-center py-4 px-2">
-                                    <span className="font-semibold text-gray-500 text-lg">Sweet Shop</span>
+                                    <span className="font-playfair font-bold text-gray-800 text-2xl tracking-wide">Sweet Shop</span>
                                 </a>
                             </div>
                         </div>
-                        <div className="flex items-center space-x-3">
-                            <button onClick={() => navigate('/dashboard')} className="py-2 px-2 font-medium text-gray-500 hover:text-gray-900 transition duration-300">Dashboard</button>
-                            <span className="text-gray-700">Welcome, {user?.role}</span>
-                            <button onClick={() => { logout(); navigate('/login'); }} className="py-2 px-2 font-medium text-white bg-red-500 rounded hover:bg-red-400 transition duration-300">Log Out</button>
+                        <div className="flex items-center space-x-4">
+                            <button onClick={() => navigate('/dashboard')} className="py-2 px-6 font-bold text-chocolate bg-gradient-to-r from-saffron-start to-saffron-end rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 border border-white/20">Dashboard</button>
+                            <span className="text-chocolate font-medium font-playfair tracking-wide">Welcome, {user?.role}</span>
+                            <button onClick={() => { logout(); navigate('/login'); }} className="py-2 px-6 font-bold text-white bg-[#880E4F] rounded-full hover:bg-red-800 transition duration-300 shadow-md">Log Out</button>
                         </div>
                     </div>
                 </div>
             </nav>
 
-            <div className="container mx-auto px-4">
-                <h2 className="text-2xl font-bold mb-6">Your Cart</h2>
+            <div className="container mx-auto px-4 max-w-4xl">
+                <h2 className="text-3xl font-playfair font-bold mb-8 text-maroon text-center">Your Cart</h2>
                 {cart.length === 0 ? (
-                    <p className="text-gray-600">Your cart is empty.</p>
+                    <div className="text-center py-12 bg-white rounded-2xl shadow-lg border border-orange-100">
+                        <p className="text-xl text-chocolate/80 font-poppins">Your cart is currently empty.</p>
+                        <button onClick={() => navigate('/dashboard')} className="mt-6 py-2 px-6 font-bold text-white bg-premium-green rounded-full hover:bg-green-800 transition shadow-md">Start Shopping</button>
+                    </div>
                 ) : (
-                    <div className="bg-white rounded-lg shadow-md p-6">
+                    <div className="bg-white rounded-3xl shadow-xl p-8 border border-white/50">
                         {cart.map((item) => {
                             if (!item.sweet) return null;
                             return (
-                                <div key={item._id || Math.random()} className="flex justify-between items-center border-b py-4 last:border-b-0">
+                                <div key={item._id || Math.random()} className="flex justify-between items-center border-b border-gray-100 py-6 last:border-b-0 group hover:bg-gray-50/50 transition duration-300 rounded-lg px-2">
                                     <div className="flex items-center">
-                                        {item.sweet.imageUrl && <img src={item.sweet.imageUrl} alt={item.sweet.name} className="w-16 h-16 object-cover rounded mr-4" />}
+                                        {item.sweet.imageUrl && <img src={item.sweet.imageUrl} alt={item.sweet.name} className="w-20 h-20 object-cover rounded-xl shadow-md mr-6" />}
                                         <div>
-                                            <h3 className="text-lg font-semibold">{item.sweet.name}</h3>
-                                            <p className="text-gray-600">${item.sweet.price} x {item.quantity}</p>
+                                            <h3 className="text-xl font-playfair font-bold text-maroon mb-1">{item.sweet.name}</h3>
+                                            <p className="text-chocolate font-medium">Rs {item.sweet.price} x {item.quantity}</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center">
+                                    <div className="flex items-center gap-2">
                                         <button
                                             onClick={() => handleUpdateQuantity(item.sweet._id, item.quantity - 1)}
-                                            className="bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
+                                            className="w-8 h-8 rounded-full bg-gray-100 text-chocolate font-bold hover:bg-saffron-start hover:text-white transition flex items-center justify-center shadow-sm"
                                         >-</button>
-                                        <span className="mx-2">{item.quantity}</span>
+                                        <span className="mx-2 font-bold text-lg text-chocolate w-4 text-center">{item.quantity}</span>
                                         <button
                                             onClick={() => handleUpdateQuantity(item.sweet._id, item.quantity + 1)}
-                                            className="bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
+                                            className="w-8 h-8 rounded-full bg-gray-100 text-chocolate font-bold hover:bg-saffron-start hover:text-white transition flex items-center justify-center shadow-sm"
                                         >+</button>
                                         <button
                                             onClick={() => handleRemove(item.sweet._id)}
-                                            className="text-red-600 hover:text-red-800 ml-4"
+                                            className="text-red-500 hover:text-red-700 ml-6 font-medium text-sm border border-red-200 px-3 py-1 rounded-full hover:bg-red-50 transition"
                                         >
                                             Remove
                                         </button>
@@ -160,13 +163,16 @@ const Cart = () => {
                                 </div>
                             );
                         })}
-                        <div className="mt-6 flex justify-between items-center border-t pt-4">
-                            <span className="text-xl font-bold">Total: ${total}</span>
+                        <div className="mt-8 flex justify-between items-center border-t border-gray-100 pt-6">
+                            <div className="flex flex-col">
+                                <span className="text-sm text-gray-500 font-poppins">Total Amount</span>
+                                <span className="text-3xl font-playfair font-bold text-premium-green">Rs {total}</span>
+                            </div>
                             <button
                                 onClick={handlePurchase}
-                                className="bg-green-600 text-white py-2 px-6 rounded hover:bg-green-700 transition duration-300"
+                                className="bg-gradient-to-r from-saffron-start to-saffron-end text-chocolate font-bold py-3 px-10 rounded-full shadow-lg hover:shadow-xl hover:translate-y-[-2px] transition-all duration-300 border border-white/20 text-lg"
                             >
-                                Buy Now
+                                Checkout
                             </button>
                         </div>
                     </div>

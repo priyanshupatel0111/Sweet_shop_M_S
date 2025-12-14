@@ -239,7 +239,7 @@ const AdminPanel = () => {
                                         <tr key={sweet._id} className="hover:bg-gray-50">
                                             <td className="p-4 border-b">{sweet.name}</td>
                                             <td className="p-4 border-b">{sweet.category}</td>
-                                            <td className="p-4 border-b">${sweet.price}</td>
+                                            <td className="p-4 border-b">Rs {sweet.price}</td>
                                             <td className="p-4 border-b">{sweet.quantity}</td>
                                             <td className="p-4 border-b space-x-2">
                                                 <button onClick={() => handleEdit(sweet)} className="text-blue-600 hover:underline">Edit</button>
