@@ -25,7 +25,7 @@ const Login = () => {
                 setError(data.message);
             }
         } catch (err) {
-            setError('Login failed');
+            setError(' User or password not match');
         }
     };
 
