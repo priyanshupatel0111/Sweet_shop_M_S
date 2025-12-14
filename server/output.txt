@@ -1,0 +1,39 @@
+  console.log
+    [dotenv@17.2.3] injecting env (3) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+FAIL tests/cart.test.js
+  Cart API
+    √ should add item to cart (205 ms)
+    √ should get cart items (153 ms)
+    √ should remove item from cart (148 ms)
+    × should purchase cart (139 ms)
+
+  ● Cart API › should purchase cart
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: 200
+    Received: 500
+
+    [0m [90m 107 |[39m             [33m.[39m[36mset[39m([32m'Authorization'[39m[33m,[39m [32m`Bearer ${token}`[39m)[33m;[39m
+     [90m 108 |[39m
+    [31m[1m>[22m[39m[90m 109 |[39m         expect(res[33m.[39mstatusCode)[33m.[39mtoEqual([35m200[39m)[33m;[39m
+     [90m     |[39m                                [31m[1m^[22m[39m
+     [90m 110 |[39m         expect(res[33m.[39mbody[33m.[39mmessage)[33m.[39mtoEqual([32m'Purchase successful'[39m)[33m;[39m
+     [90m 111 |[39m
+     [90m 112 |[39m         [90m// Check sweet stock reduced[39m[0m
+
+      at Object.toEqual (tests/cart.test.js:109:32)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 3 passed, 4 total
+Snapshots:   0 total
+Time:        1.598 s, estimated 2 s
+Ran all test suites matching tests/cart.test.js.
