@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
+import { API_BASE } from '../api';
 const AdminPanel = () => {
     const [sweets, setSweets] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -20,7 +20,7 @@ const AdminPanel = () => {
 
     const fetchSweets = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/sweets');
+            const response = await fetch(`${API_BASE}/api/sweets`);
             const data = await response.json();
             setSweets(data);
         } catch (error) {
@@ -30,7 +30,7 @@ const AdminPanel = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/categories');
+            const response = await fetch(`${API_BASE}/api/categories`);
             const data = await response.json();
             setCategories(data);
         } catch (error) {
@@ -41,8 +41,8 @@ const AdminPanel = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const url = editingId
-            ? `http://localhost:5000/api/sweets/${editingId}`
-            : 'http://localhost:5000/api/sweets';
+            ? `${API_BASE}/api/sweets/${editingId}`
+            : `${API_BASE}/api/sweets`;
         const method = editingId ? 'PUT' : 'POST';
 
         try {
@@ -75,7 +75,7 @@ const AdminPanel = () => {
 
         try {
             console.log('Sending request to server...');
-            const response = await fetch('http://localhost:5000/api/categories', {
+            const response = await fetch(`${API_BASE}/api/categories`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const AdminPanel = () => {
     const handleDeleteCategory = async (id) => {
         if (!window.confirm('Are you sure you want to delete this category?')) return;
         try {
-            const response = await fetch(`http://localhost:5000/api/categories/${id}`, {
+            const response = await fetch(`${API_BASE}/api/categories/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${user.token}` }
             });
@@ -129,7 +129,7 @@ const AdminPanel = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure?')) return;
         try {
-            await fetch(`http://localhost:5000/api/sweets/${id}`, {
+            await fetch(`${API_BASE}/api/sweets/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${user.token}` }
             });
@@ -155,7 +155,7 @@ const AdminPanel = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/sweets/${id}/restock`, {
+            const response = await fetch(`${API_BASE}/api/sweets/${id}/restock`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

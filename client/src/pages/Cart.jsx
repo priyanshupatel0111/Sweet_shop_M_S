@@ -18,7 +18,7 @@ const Cart = () => {
 
     const fetchCart = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/sweets/cart', {
+            const response = await fetch('`${API_BASE}/api/sweets/cart', {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -49,7 +49,7 @@ const Cart = () => {
     const handleUpdateQuantity = async (sweetId, newQuantity) => {
         if (newQuantity < 1) return;
         try {
-            const response = await fetch(`http://localhost:5000/api/sweets/cart/${sweetId}`, {
+            const response = await fetch(`${API_BASE}/api/sweets/cart/${sweetId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const Cart = () => {
 
     const handleRemove = async (sweetId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/sweets/cart/${sweetId}`, {
+            const response = await fetch(`${API_BASE}/api/sweets/cart/${sweetId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${user.token}`
@@ -83,7 +83,7 @@ const Cart = () => {
 
     const handlePurchase = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/sweets/cart/purchase', {
+            const response = await fetch(`${API_BASE}/api/sweets/cart/purchase`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${user.token}`

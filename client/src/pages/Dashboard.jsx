@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/categories');
+            const response = await fetch(`${API_BASE}/api/categories`);
             const data = await response.json();
             setCategories(data);
         } catch (error) {
@@ -30,7 +30,7 @@ const Dashboard = () => {
         if (category) query += `&category=${category}`;
 
         try {
-            const response = await fetch(`http://localhost:5000/api/sweets/search${query}`);
+            const response = await fetch(`${API_BASE}/api/sweets/search${query}`);
             const data = await response.json();
             setSweets(data);
         } catch (error) {
@@ -46,7 +46,7 @@ const Dashboard = () => {
 
     const fetchCart = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/sweets/cart', {
+            const response = await fetch(`${API_BASE}/api/sweets/cart`, {
                 headers: { 'Authorization': `Bearer ${user.token}` }
             });
             if (response.ok) {
@@ -61,7 +61,7 @@ const Dashboard = () => {
 
     const handleAddToCart = async (id) => {
         try {
-            const response = await fetch('http://localhost:5000/api/sweets/cart/add', {
+            const response = await fetch(`${API_BASE}/api/sweets/cart/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
