@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../api';
 
 const Dashboard = () => {
     const [sweets, setSweets] = useState([]);
