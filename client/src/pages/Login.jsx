@@ -32,7 +32,7 @@ const Login = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <div className="px-10 py-8 mt-4 text-left bg-white shadow-xl rounded-2xl w-[28rem]">
+            <div className="px-10 py-8 mt-4 text-left bg-white shadow-xl rounded-2xl w-full max-w-md mx-4">
                 <h3 className="text-3xl font-playfair font-bold text-center text-maroon mb-6">Welcome Back</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="mt-4">

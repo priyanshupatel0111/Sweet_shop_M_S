@@ -107,17 +107,17 @@ const Cart = () => {
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white shadow-xl relative z-10 mb-8">
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="flex justify-between items-center h-20">
+                    <div className="flex flex-col md:flex-row justify-between items-center py-4 md:h-20 space-y-4 md:space-0">
                         <div className="flex space-x-7">
                             <div>
-                                <a href="#" onClick={() => navigate('/dashboard')} className="flex items-center py-4 px-2">
+                                <a href="#" onClick={() => navigate('/dashboard')} className="flex items-center px-2">
                                     <span className="font-playfair font-bold text-gray-800 text-2xl tracking-wide">Sweet Shop</span>
                                 </a>
                             </div>
                         </div>
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-4 w-full md:w-auto justify-center md:justify-end">
                             <button onClick={() => navigate('/dashboard')} className="py-2 px-6 font-bold text-chocolate bg-gradient-to-r from-saffron-start to-saffron-end rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 border border-white/20">Dashboard</button>
-                            <span className="text-chocolate font-medium font-playfair tracking-wide">Welcome, {user?.role}</span>
+                            <span className="hidden md:inline text-chocolate font-medium font-playfair tracking-wide">Welcome, {user?.role}</span>
                             <button onClick={() => { logout(); navigate('/login'); }} className="py-2 px-6 font-bold text-white bg-[#880E4F] rounded-full hover:bg-red-800 transition duration-300 shadow-md">Log Out</button>
                         </div>
                     </div>
@@ -136,24 +136,26 @@ const Cart = () => {
                         {cart.map((item) => {
                             if (!item.sweet) return null;
                             return (
-                                <div key={item._id || Math.random()} className="flex justify-between items-center border-b border-gray-100 py-6 last:border-b-0 group hover:bg-gray-50/50 transition duration-300 rounded-lg px-2">
-                                    <div className="flex items-center">
+                                <div key={item._id || Math.random()} className="flex flex-col md:flex-row justify-between items-center border-b border-gray-100 py-6 last:border-b-0 group hover:bg-gray-50/50 transition duration-300 rounded-lg px-2">
+                                    <div className="flex items-center mb-4 md:mb-0 w-full md:w-auto">
                                         {item.sweet.imageUrl && <img src={item.sweet.imageUrl} alt={item.sweet.name} className="w-20 h-20 object-cover rounded-xl shadow-md mr-6" />}
                                         <div>
                                             <h3 className="text-xl font-playfair font-bold text-maroon mb-1">{item.sweet.name}</h3>
                                             <p className="text-chocolate font-medium">Rs {item.sweet.price} x {item.quantity}</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                        <button
-                                            onClick={() => handleUpdateQuantity(item.sweet._id, item.quantity - 1)}
-                                            className="w-8 h-8 rounded-full bg-gray-100 text-chocolate font-bold hover:bg-saffron-start hover:text-white transition flex items-center justify-center shadow-sm"
-                                        >-</button>
-                                        <span className="mx-2 font-bold text-lg text-chocolate w-4 text-center">{item.quantity}</span>
-                                        <button
-                                            onClick={() => handleUpdateQuantity(item.sweet._id, item.quantity + 1)}
-                                            className="w-8 h-8 rounded-full bg-gray-100 text-chocolate font-bold hover:bg-saffron-start hover:text-white transition flex items-center justify-center shadow-sm"
-                                        >+</button>
+                                    <div className="flex items-center gap-2 w-full md:w-auto justify-between md:justify-end">
+                                        <div className="flex items-center">
+                                            <button
+                                                onClick={() => handleUpdateQuantity(item.sweet._id, item.quantity - 1)}
+                                                className="w-8 h-8 rounded-full bg-gray-100 text-chocolate font-bold hover:bg-saffron-start hover:text-white transition flex items-center justify-center shadow-sm"
+                                            >-</button>
+                                            <span className="mx-2 font-bold text-lg text-chocolate w-4 text-center">{item.quantity}</span>
+                                            <button
+                                                onClick={() => handleUpdateQuantity(item.sweet._id, item.quantity + 1)}
+                                                className="w-8 h-8 rounded-full bg-gray-100 text-chocolate font-bold hover:bg-saffron-start hover:text-white transition flex items-center justify-center shadow-sm"
+                                            >+</button>
+                                        </div>
                                         <button
                                             onClick={() => handleRemove(item.sweet._id)}
                                             className="text-red-500 hover:text-red-700 ml-6 font-medium text-sm border border-red-200 px-3 py-1 rounded-full hover:bg-red-50 transition"

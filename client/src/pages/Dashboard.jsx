@@ -86,15 +86,15 @@ const Dashboard = () => {
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white shadow-xl relative z-10">
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="flex justify-between items-center h-20">
+                    <div className="flex flex-col md:flex-row justify-between items-center py-4 md:h-20 space-y-4 md:space-y-0">
                         <div className="flex space-x-7">
                             <div>
-                                <a href="#" className="flex items-center py-4 px-2">
+                                <a href="#" className="flex items-center px-2">
                                     <span className="font-playfair font-bold text-gray-800 text-2xl tracking-wide">Sweet Shop</span>
                                 </a>
                             </div>
                         </div>
-                        <div className="flex-1 max-w-xl mx-8">
+                        <div className="flex-1 w-full md:w-auto md:max-w-xl mx-0 md:mx-8">
                             <input
                                 type="text"
                                 placeholder="Search delicious sweets..."
@@ -103,9 +103,9 @@ const Dashboard = () => {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-4 w-full md:w-auto justify-center md:justify-end">
                             <button onClick={() => navigate('/cart')} className="py-2 px-6 font-bold text-chocolate bg-gradient-to-r from-saffron-start to-saffron-end rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 border border-white/20">Cart</button>
-                            <span className="text-chocolate font-medium font-playfair tracking-wide">Welcome, {user?.role}</span>
+                            <span className="hidden md:inline text-chocolate font-medium font-playfair tracking-wide">Welcome, {user?.role}</span>
                             <button onClick={() => { logout(); navigate('/login'); }} className="py-2 px-6 font-bold text-white bg-[#880E4F] rounded-full hover:bg-red-800 transition duration-300 shadow-md">Log Out</button>
                         </div>
                     </div>

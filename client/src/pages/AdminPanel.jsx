@@ -181,9 +181,9 @@ const AdminPanel = () => {
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white shadow-lg mb-8">
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="flex justify-between py-4">
+                    <div className="flex justify-between py-4 items-center">
                         <span className="font-bold text-xl">Admin Panel</span>
-                        <button onClick={() => { logout(); navigate('/login'); }} className="text-red-500">Logout</button>
+                        <button onClick={() => { logout(); navigate('/login'); }} className="text-red-500 font-bold hover:text-red-700">Logout</button>
                     </div>
                 </div>
             </nav>
@@ -195,9 +195,9 @@ const AdminPanel = () => {
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <h2 className="text-xl font-bold mb-4">{editingId ? 'Edit Sweet' : 'Add New Sweet'}</h2>
                             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <input type="text" placeholder="Name" className="border p-2 rounded" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} required />
+                                <input type="text" placeholder="Name" className="border p-2 rounded w-full" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} required />
                                 <select
-                                    className="border p-2 rounded"
+                                    className="border p-2 rounded w-full"
                                     value={formData.category}
                                     onChange={e => setFormData({ ...formData, category: e.target.value })}
                                     required
@@ -207,15 +207,15 @@ const AdminPanel = () => {
                                         <option key={cat._id} value={cat.name}>{cat.name}</option>
                                     ))}
                                 </select>
-                                <input type="number" placeholder="Price" className="border p-2 rounded" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} required />
-                                <input type="number" placeholder="Quantity" className="border p-2 rounded" value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} required />
-                                <input type="text" placeholder="Image URL" className="border p-2 rounded" value={formData.imageUrl} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} />
-                                <textarea placeholder="Description" className="border p-2 rounded md:col-span-2" value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} />
-                                <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 md:col-span-2">
+                                <input type="number" placeholder="Price" className="border p-2 rounded w-full" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} required />
+                                <input type="number" placeholder="Quantity" className="border p-2 rounded w-full" value={formData.quantity} onChange={e => setFormData({ ...formData, quantity: e.target.value })} required />
+                                <input type="text" placeholder="Image URL" className="border p-2 rounded w-full" value={formData.imageUrl} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} />
+                                <textarea placeholder="Description" className="border p-2 rounded md:col-span-2 w-full" value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} />
+                                <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 md:col-span-2 w-full font-bold">
                                     {editingId ? 'Update Sweet' : 'Add Sweet'}
                                 </button>
                                 {editingId && (
-                                    <button type="button" onClick={() => { setEditingId(null); setFormData({ name: '', category: '', price: '', quantity: '', description: '', imageUrl: '' }); }} className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 md:col-span-2">
+                                    <button type="button" onClick={() => { setEditingId(null); setFormData({ name: '', category: '', price: '', quantity: '', description: '', imageUrl: '' }); }} className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 md:col-span-2 w-full">
                                         Cancel Edit
                                     </button>
                                 )}
@@ -237,14 +237,14 @@ const AdminPanel = () => {
                                 <tbody>
                                     {sweets.map(sweet => (
                                         <tr key={sweet._id} className="hover:bg-gray-50">
-                                            <td className="p-4 border-b">{sweet.name}</td>
-                                            <td className="p-4 border-b">{sweet.category}</td>
-                                            <td className="p-4 border-b">Rs {sweet.price}</td>
-                                            <td className="p-4 border-b">{sweet.quantity}</td>
-                                            <td className="p-4 border-b space-x-2">
-                                                <button onClick={() => handleEdit(sweet)} className="text-blue-600 hover:underline">Edit</button>
-                                                <button onClick={() => handleDelete(sweet._id)} className="text-red-600 hover:underline">Delete</button>
-                                                <button onClick={() => handleRestock(sweet._id)} className="text-green-600 hover:underline">Restock</button>
+                                            <td className="p-4 border-b whitespace-nowrap font-medium">{sweet.name}</td>
+                                            <td className="p-4 border-b whitespace-nowrap">{sweet.category}</td>
+                                            <td className="p-4 border-b whitespace-nowrap">Rs {sweet.price}</td>
+                                            <td className="p-4 border-b whitespace-nowrap">{sweet.quantity}</td>
+                                            <td className="p-4 border-b space-x-2 whitespace-nowrap">
+                                                <button onClick={() => handleEdit(sweet)} className="text-blue-600 hover:underline font-bold">Edit</button>
+                                                <button onClick={() => handleDelete(sweet._id)} className="text-red-600 hover:underline font-bold">Delete</button>
+                                                <button onClick={() => handleRestock(sweet._id)} className="text-green-600 hover:underline font-bold">Restock</button>
                                             </td>
                                         </tr>
                                     ))}
