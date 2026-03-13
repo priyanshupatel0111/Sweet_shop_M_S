@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: sweet-shop-ms
+    env: node
+    buildCommand: ./build.sh
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
