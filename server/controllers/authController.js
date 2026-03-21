@@ -6,6 +6,10 @@ exports.register = async (req, res) => {
     try {
         const { username, password, role } = req.body;
 
+        if (!username || !password) {
+            return res.status(400).json({ message: 'Username and password are required' });
+        }
+
         const existingUser = await User.findOne({ username });
         if (existingUser) {
             return res.status(400).json({ message: 'Username already exists' });
@@ -21,13 +25,18 @@ exports.register = async (req, res) => {
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        console.error('Registration error:', error);
+        res.status(500).json({ message: 'Server error during registration' });
     }
 };
 
 exports.login = async (req, res) => {
     try {
         const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.status(400).json({ message: 'Username and password are required' });
+        }
 
         const user = await User.findOne({ username });
         if (!user) {
@@ -47,6 +56,7 @@ exports.login = async (req, res) => {
 
         res.status(200).json({ token, role: user.role });
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        console.error('Login error:', error);
+        res.status(500).json({ message: 'Server error during login' });
     }
 };

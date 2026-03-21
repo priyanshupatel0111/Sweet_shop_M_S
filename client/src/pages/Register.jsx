@@ -8,9 +8,12 @@ const Register = () => {
     const [role, setRole] = useState('customer');
     const navigate = useNavigate();
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError('');
         try {
             const response = await fetch(`${API_BASE}/api/auth/register`, {
                 method: 'POST',
@@ -21,10 +24,12 @@ const Register = () => {
             if (response.ok) {
                 navigate('/login');
             } else {
-                setError(data.message);
+                setError(data.message || 'Registration failed');
             }
         } catch (err) {
-            setError('Registration failed');
+            setError(err.message || 'Network error: ensure backend is running');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -38,13 +43,13 @@ const Register = () => {
                             <label className="block font-bold text-chocolate font-poppins" htmlFor="username">Username</label>
                             <input type="text" placeholder="Choose a username"
                                 className="w-full px-4 py-3 mt-2 border border-gray-200 rounded-full focus:outline-none focus:border-saffron-start focus:ring-1 focus:ring-saffron-start transition-all bg-gray-50"
-                                value={username} onChange={(e) => setUsername(e.target.value)} required />
+                                value={username} onChange={(e) => setUsername(e.target.value)} required disabled={loading} />
                         </div>
                         <div className="mt-4">
                             <label className="block font-bold text-chocolate font-poppins" htmlFor="password">Password</label>
                             <input type="password" placeholder="Create a password"
                                 className="w-full px-4 py-3 mt-2 border border-gray-200 rounded-full focus:outline-none focus:border-saffron-start focus:ring-1 focus:ring-saffron-start transition-all bg-gray-50"
-                                value={password} onChange={(e) => setPassword(e.target.value)} required />
+                                value={password} onChange={(e) => setPassword(e.target.value)} required disabled={loading} />
                         </div>
                         <div className="mt-4">
                             <label className="block font-bold text-chocolate font-poppins" htmlFor="role">Role</label>
@@ -62,7 +67,9 @@ const Register = () => {
                         </div>
                         {error && <p className="text-red-500 text-sm mt-3 text-center">{error}</p>}
                         <div className="flex flex-col items-center justify-between mt-8">
-                            <button className="w-full px-6 py-3 text-chocolate font-bold bg-gradient-to-r from-saffron-start to-saffron-end rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform active:scale-95 border border-white/20">Register</button>
+                            <button disabled={loading} className={`w-full px-6 py-3 font-bold rounded-full shadow-lg transition-all duration-300 transform active:scale-95 border border-white/20 ${loading ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'text-chocolate bg-gradient-to-r from-saffron-start to-saffron-end hover:shadow-xl'}`}>
+                                {loading ? 'Registering...' : 'Register'}
+                            </button>
                             <div className="mt-4 text-sm text-gray-600">
                                 Already have an account? <Link to="/login" className="text-maroon font-bold hover:underline">Sign in</Link>
                             </div>
