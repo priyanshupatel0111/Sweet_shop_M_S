@@ -23,7 +23,7 @@ app.use(helmet({
 }));
 app.use(compression());
 app.use(cors({
-    origin:"https://sweet-shop-m-s-2.onrender.com",
+    origin:"https://sweet-shop-m-s-1.onrender.com",
     credentials:true
 }));
 app.use(express.json());
