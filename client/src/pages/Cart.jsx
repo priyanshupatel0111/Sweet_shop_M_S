@@ -19,7 +19,7 @@ const Cart = () => {
 
     const fetchCart = async () => {
         try {
-            const response = await fetch('`${API_BASE}/api/sweets/cart', {
+            const response = await fetch(`${API_BASE}/api/sweets/cart`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
